@@ -1,0 +1,126 @@
+package com.example.mavendemo.pckg1;
+
+import static org.testng.Assert.assertEquals;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Demoformaven {
+	WebDriver driver;
+	  @BeforeTest(groups = {"smoke", "sanity"})
+	  public void openbrowser() {
+		  System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+		  driver = new ChromeDriver();
+		  System.out.println("browser opened successfully in beforetest");
+			
+	  }
+	  
+	  @Test(groups = {"smoke"}, priority =1 )
+	  public void gmail() {
+		  driver.get("https:\\www.gmail.com");
+		  assertEquals(driver.getTitle(), driver.getTitle());
+		  System.out.println("Gmail opened successfully in test1");
+	  }
+	  @Test(groups = {"sanity"}, priority =1 )
+	  public void facebook() {
+		  driver.get("https:\\www.facebook.com");
+		  assertEquals(driver.getTitle(), driver.getTitle());  
+		  System.out.println("facebook opened successfully in test2");
+	  }
+	  @AfterTest(groups = {"smoke", "sanity"})
+	  public void closebrowser() {
+		  driver.close();
+		  System.out.println("browser closed  successfully in aftertest");
+	  }
+
+}
+POM.XML:
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>  <groupId>com.example</groupId>
+  <artifactId>com.example.mavendemo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Demo</name>
+  <description>Demo</description>
+  <properties>
+<suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
+</properties>
+
+<dependencies>
+<dependency>
+<groupId>org.testng</groupId>
+<artifactId>testng</artifactId>
+<version>6.1.1</version>
+</dependency>
+<!-- Adding Selenium dependency -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>3.0.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.11</version>
+</dependency>
+
+
+</dependencies>
+
+<build>
+<plugins>
+ 
+<plugin>
+
+<groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.6.1</version>
+<configuration>
+<compilerVersion>1.8</compilerVersion>
+<source>1.6</source>
+<target>1.6</target>
+</configuration>
+</plugin>
+ 
+<plugin>
+ <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+
+<configuration>
+
+ 
+<suiteXmlFiles>
+<suiteXmlFile>testng.xml</suiteXmlFile>
+</suiteXmlFiles>
+ 
+</configuration>
+</plugin>
+ 
+</plugins>
+ 
+</build>
+  
+</project>
+TESTNG.XML:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+  <groups>
+ <run>
+ <include name="smoke"/>
+ </run>
+
+  </groups>
+    <classes>
+      <class name="com.example.mavendemo.pckg1.Demoformaven"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+
