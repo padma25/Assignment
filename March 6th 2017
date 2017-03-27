@@ -1,0 +1,36 @@
+Test Demo
+package test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class TestDemo {
+@Test
+public void print(){
+	WebDriver driver;
+	System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+	driver=new ChromeDriver();
+	driver.get("https:\\www.facebook.com");
+	driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("padmaja.mj7@gmail.com");
+	driver.findElement(By.xpath(".//*[@id='pass']")).sendKeys("facepalm07");
+	System.out.println("Welcome TestNG Through Command Prompt");
+	driver.findElement(By.xpath(".//*[@id='u_0_q']")).click();
+	driver.close();
+}
+}
+XML FILE
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="test.TestDemo"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+BAT FILE:
+java -cp bin;lib/* org.testng.TestNG testng.xml
+
+TESTNG REPORT: 
