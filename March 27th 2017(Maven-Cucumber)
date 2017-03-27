@@ -1,0 +1,142 @@
+Step definition
+package cucumberdemo;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Stepdef {
+	WebDriver driver;
+	@Given("^User opens Browser and opens FacebookLogin Page$")
+	public void user_opens_Browser_and_opens_FacebookLogin_Page() throws Throwable {
+	    System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+	    driver= new ChromeDriver();
+	    driver.get("https://www.facebook.com");
+	    }
+
+	@When("^User Enters Valid \"([^\"]*)\" and Valid \"([^\"]*)\"$")
+	public void user_Enters_Valid_and_Valid(String arg1, String arg2) throws Throwable {
+		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("padma@gmail.com");
+		driver.findElement(By.xpath(".//*[@id='pass']")).sendKeys("password");
+	}
+
+	@Then("^User should be able to login successfully$")
+	public void user_should_be_able_to_login_successfully() throws Throwable {
+		driver.findElement(By.xpath(".//*[@id='u_0_q']")).click();
+	}
+	@Then("^User should close the Browser$")
+	public void user_should_close_the_Browser() throws Throwable {
+		Thread.sleep(5000);
+driver.close();
+	}
+}
+Runner Class
+package cucumberdemo;
+
+import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features="Feat", glue={"cucumberdemo"},plugin={"html:target/cucumber-html-report"})
+
+public class Runnerclass {
+}
+Feature File
+Feature: Facebook Login Demo
+Scenario Outline: User should login into Facebook Successfully
+Given User opens Browser and opens FacebookLogin Page
+When User Enters Valid "<Username>" and Valid "<Password>"
+Then User should be able to login successfully
+Then User should close the Browser
+Examples:
+| Username | Password |
+| padmaja@gmail.com | password |
+POM.XML:
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Sampleproject</groupId>
+  <artifactId>Maven-Cucumberdemo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Cucumberdemo</name>
+
+  <dependencies>
+  <dependency>
+<groupId>org.testng</groupId>
+<artifactId>testng</artifactId>
+<version>6.1.1</version>
+</dependency>
+<!-- Adding Selenium dependency -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>3.0.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+<dependency>
+    <groupId>info.cukes</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>1.2.5</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
+<dependency>
+    <groupId>info.cukes</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>1.2.5</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/info.cukes/gherkin -->
+<dependency>
+    <groupId>info.cukes</groupId>
+    <artifactId>gherkin</artifactId>
+    <version>2.12.2</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.11</version>
+</dependency>
+
+
+</dependencies>
+
+<build>
+<plugins>
+ 
+<plugin>
+
+<groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.6.1</version>
+<configuration>
+<compilerVersion>1.8</compilerVersion>
+<source>1.6</source>
+<target>1.6</target>
+</configuration>
+</plugin>
+ 
+<plugin>
+ <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+
+<configuration>
+ 
+<suiteXmlFiles>
+<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+</suiteXmlFiles>
+ 
+</configuration>
+</plugin>
+ 
+</plugins>
+</build>
+</project>
+REPORT:
+
+ 
