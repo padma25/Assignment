@@ -1,0 +1,168 @@
+RegressionTest
+package jenkinsdemo;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+public class RegressionTest {
+	WebDriver driver;	
+@BeforeTest
+public void OpenBrowser(){
+	System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+	driver=new ChromeDriver();
+	driver.get("https:\\www.facebook.com");
+	System.out.println("browser opened successfully");
+}
+@Test(priority=1)
+public void Login(){	
+	driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("padmaja.mj7@gmail.com");
+	driver.findElement(By.xpath(".//*[@id='pass']")).sendKeys("facepalm07");
+	driver.findElement(By.xpath(".//*[@id='u_0_q']")).click();
+	System.out.println("Login successfully");
+}
+@AfterTest
+public void Closebrowser(){
+	driver.quit();
+	System.out.println("browser closed successfully");
+}
+}
+SmokeTest
+package jenkinsdemo;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+public class SmokeTest {
+@BeforeTest
+public void print1(){
+	System.out.println("This is before all test method");
+}
+@BeforeMethod
+public void printm1(){
+	System.out.println("This is before each Test method");
+}
+@Test(groups={"Group1"},priority=1)
+public void printtest1(){
+	System.out.println("This is group1 first test method");
+}
+@Test(groups={"Group1"},priority=2)
+public void printtest2(){
+	System.out.println("This is group1 second test method");
+}
+@Test(groups={"Group2"},priority=2)
+public void printtestg2(){
+	System.out.println("This is Group2 first test method");
+}
+@AfterMethod
+public void printm2(){
+	System.out.println("This is After each Test method");
+}
+@AfterTest
+public void print2(){
+	System.out.println("This is After all test method");
+}
+}
+POM.XML:
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>JenkinsMavenDemo</groupId>
+  <artifactId>JMD</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>3.3.1</version>
+    </dependency>
+     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>6.11</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+<dependency>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+</dependency>
+
+    </dependencies>
+    <profiles>
+    <profile>
+    <id>SmokeTesting</id>
+     <build>
+ <pluginManagement>
+  <plugins>
+  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>SmokeTesting.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+      </plugins>
+ </pluginManagement>
+</build>
+    </profile>
+    <profile>
+    <id>RegressionTesting</id>
+     <build>
+ <pluginManagement>
+  <plugins>
+  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>RegressionTesting.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+      </plugins>
+ </pluginManagement>
+</build>
+    </profile>
+    </profiles>
+
+</project>
+REGRESSION.XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Tests"> 
+ <classes>  
+   <class name = "jenkinsdemo.RegressionTest"/>
+   </classes>
+  </test>
+  <!-- Test -->
+</suite> <!-- Suite -->
+SMOKETESTING.XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Tests">
+   <classes>
+   <class name = "jenkinsdemo.SmokeTest"/>
+   </classes>
+  </test>
+  <!-- Test -->
+</suite> <!-- Suite -->
+
+REPORT:
+ 
+
+
