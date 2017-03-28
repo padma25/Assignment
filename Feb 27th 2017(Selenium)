@@ -1,0 +1,565 @@
+Alerts:
+package seleniumassignment;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+public class Alertsdemo {
+public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.gecko.driver","c://SOFTS//Selenium//geckodriver.exe");
+		WebDriver driver=new FirefoxDriver();
+		driver.get("http://www.tizag.com/javascriptT/javascriptalert.php");
+		driver.findElement(By.xpath("html/body/table[3]/tbody/tr[1]/td[2]/table/tbody/tr/td/div[4]/form/input")).click();
+		System.out.println(driver.switchTo().alert().getText());
+		//driver.switchTo().alert().sendKeys("fesfe");
+		driver.switchTo().alert().accept();          //Accept is for positive response like ok, done, yes
+		//driver.switchTo().alert().dismiss();  // dismiss is for negative response
+		}
+		}
+Amazon:
+package seleniumassignment;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+public class amazondemo {
+	WebDriver driver; 
+public void M1() throws InterruptedException{                                                  // Mouse Hovering
+	System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+	driver = new ChromeDriver();
+	driver.get("https:\\www.amazon.com");
+	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+	Actions A = new Actions(driver);
+	WebElement ele=driver.findElement(By.xpath(".//*[@id='nav-link-shopall']"));
+	A.moveToElement(ele).build().perform();
+	ele=driver.findElement(By.xpath(".//*[@id='nav-flyout-shopAll']/div[2]/span[10]/span"));
+	A.moveToElement(ele).build().perform();
+	ele=driver.findElement(By.xpath(".//*[@id='nav-flyout-shopAll']/div[3]/div[10]/div[1]/a[2]/span"));
+	ele.click();
+	}
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+amazondemo az = new amazondemo();
+az.M1();
+	}
+	}
+  ChromeDriver/Screenshot:
+  package seleniumassignment;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class Chromedrivedemo {
+WebDriver driver;
+public void method1() throws InterruptedException // launching chrome, 
+{
+	
+  System.setProperty("webdriver.chrome.driver","c:\\SOFTS\\Selenium\\chromedriver.exe");
+    driver = new ChromeDriver();
+    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS );  /*manage method has 
+                                                                         all those things related to browser
+                                                                         like maximize, minimize, delete cookies*/
+   // implicitly we are making actions to wait for some time
+    //Thread.sleep(5000L);   -----------it is a explicit wait 
+    driver.get("https:\\www.facebook.com");
+    File srcfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+    FileUtils.copyFile(srcfile, new File("C:\\SOFTS\\Selenium\\screenshot.png"));
+    }
+	public static void main(String[] args) throws InterruptedException, IOException {
+		// TODO Auto-generated method stub
+		Chromedrivedemo ch = new Chromedrivedemo();
+		ch.method1();
+}
+}
+Desired_Capabilities:
+package seleniumassignment;
+
+public class desiredcapabilitydemo {
+
+public static void main(String[] args) {
+	/*The desired capability is a series of key/value pairs that stores the browser properties like browsername,
+  *  browser version, the path of the browser driver in the system, etc. to determine the behaviour of the
+  *   browser at run time.Desired capability can also be used to configure the driver instance of
+  *    Selenium WebDriver. We can configure driver instance like FirefoxDriver, ChromeDriver, 
+  *    InternetExplorerDriver by using desired capabilities. Desired Capabilities are more useful 
+  *    in cases like: In mobile application automation, where the browser properties and the device 
+  *    properties can be set. In Selenium grid when we want to run the test cases on a different browser
+  *     with different operating systems and versions.   */
+	}
+}
+Differences:
+package seleniumassignment;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import com.google.common.base.Verify;
+import junit.framework.Assert;
+public class Differences {
+	@SuppressWarnings("deprecation")
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.gecko.driver", "c://SOFTS//Selenium//geckodriver.exe"); 
+		WebDriver driver =new FirefoxDriver();
+		driver.get("http://www.spicejet.com/");
+		WebElement element =driver.findElement(By.xpath(".//*[@id='header']/div[1]/div[1]/a"));
+		String text = element.getText();
+	Assert.assertEquals(text, text);
+		System.out.println("test passed");
+		}
+}
+Drag&Drop:
+package seleniumassignment;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+public class DragDropDemo {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+			String URL = "http://www.dhtmlx.com/docs/products/dhtmlxTree/index.shtml";
+			driver.get(URL);
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(50000, TimeUnit.MILLISECONDS);
+			Actions builder = new Actions(driver);
+			WebElement From = driver.findElement(By.xpath(".//*[@id='treebox1']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[1]/td[4]/span"));
+		    WebElement To = driver.findElement(By.xpath(".//*[@id='treebox2']/div/table/tbody/tr[2]/td[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[1]/td[4]/span"));
+			Action dragAndDrop = builder.clickAndHold(From).moveToElement(To).release(To).build();
+		dragAndDrop.perform();
+	}}
+  DropDownMenus:
+  package seleniumassignment;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Dropdownsdemo {
+	WebDriver driver;
+	
+	public void demo(){
+		System.setProperty("webdriver.gecko.driver", "c://SOFTS//Selenium//geckodriver.exe"); 
+		driver =new FirefoxDriver();
+		driver.get("http://www.spicejet.com/");
+		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		System.out.println(driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_rbtnl_Trip_1']")).isSelected()); /* checking if a radio button is selected or not*/
+		driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_rbtnl_Trip_1']")).click();
+	    System.out.println(driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_rbtnl_Trip_1']")).isSelected());
+	    driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_ddl_originStation1_CTXTaction']")).click();
+	    driver.findElement(By.xpath(".//a[@value='GOI']")).click();
+	    driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_ddl_destinationStation1_CTXT']")).click();
+	    driver.findElement(By.xpath(".//*[@id='dropdownGroup1']/div/ul[2]/li[2]/a")).click();
+	    Select dropdown = new Select(driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_ddl_Adult']")));
+	    dropdown.selectByIndex(4);
+	      
+	    Select dropdownc = new Select(driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_ddl_Child']")));
+	    dropdownc.selectByIndex(2);
+	   System.out.println(driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_chk_friendsandfamily']")).isSelected());
+	   driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_chk_friendsandfamily']")).click();                                /*  checking if a check box is selected or not*/
+	   System.out.println(driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_chk_friendsandfamily']")).isSelected());
+	   // driver.quit();
+	    
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+Dropdownsdemo d= new Dropdownsdemo();
+d.demo();
+
+	}
+
+}
+LocatorsDemo:
+package seleniumassignment;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Locatorsdemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+			String URL = "https:\\www.amazon.com";
+			driver.get(URL);
+		WebElement element=	driver.findElement(By.xpath(".//*[@id='nav-xshop']/a[2]"));
+		element.click();
+		element= driver.findElement(By.cssSelector("#subscription_header>span")); 
+		element.click();
+		element= driver.findElement(By.linkText("Digital Deals")); 
+		element.click();
+		
+		element= driver.findElement(By.tagName("a")); 
+		System.out.println("no.of links in the page"+element.getSize());
+	}
+
+}
+PathsDemo:
+package seleniumassignment;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Pathdemo {
+	WebDriver driver;
+	
+	 public void method(){
+		System.setProperty("webdriver.gecko.driver", "c://SOFTS//Selenium//geckodriver.exe"); 
+		driver =new FirefoxDriver();
+		driver.get("https://www.facebook.com");
+		driver.findElement(By.xpath(".//*[@id='u_0_1']")).sendKeys("padmaja");                     /* relative xpath*/ 
+		//driver.findElement(By.xpath(".//*[@id='reg_form_box']/div[1]/div/div[2]/div")).sendKeys("jonnalagadda");
+		                             // customised xpath---tagname traversing
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/div[1]/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/form/div[1]/div[9]/button")).click();
+		// absolute xpath
+	 }
+                                                          /* absolute xpath: starts with single slash
+                                                           * It uses Complete path from the Root Element to the desire element. 
+                                                           * 
+                                                           * relative xpath: start with double slash
+                                                           * You can simply start by referencing the element you want and go from there. 
+                                                             Always Relative Xpaths are preferred as they are not the complete paths from the
+                                                             Root element. (//html//body) ..Beacuse in future any of the
+                                                             webelement when added/Removed then Absolute Xpath changes.
+                                                             So Always use Relative Xpaths in your Automation.*/
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Pathdemo p= new Pathdemo();
+		p.method();
+	}
+
+}
+RightClickDemo:
+package seleniumassignment;
+
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+
+public class Rightclickdemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "c://SOFTS//Selenium//chromedriver.exe"); 
+		WebDriver driver =new ChromeDriver();
+		
+		driver.get("https://www.google.com");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		Actions rc = new Actions(driver);
+				
+		WebElement element = driver.findElement(By.xpath(".//*[@id='sb_ifc0']"));
+		
+		Action rightclick =rc.contextClick(element).build();
+		
+		rightclick.perform();
+	
+	}
+
+}
+ScenariosDemo:
+package seleniumassignment;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+
+public class Scenariosdemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "c://SOFTS//Selenium//chromedriver.exe"); 
+
+		WebDriver driver = new ChromeDriver();
+	driver.get("https://www.google.com");
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	WebElement element = driver.findElement(By.id("lst-ib"));
+	element.sendKeys("padmaja");
+	element.submit();
+String parent=	driver.getWindowHandle();
+Set <String>wh=driver.getWindowHandles();
+Iterator<String> i=wh.iterator();
+while(i.hasNext()){
+	String child = i.next();
+	if(!parent.equalsIgnoreCase(child)){
+	driver.switchTo().window(child);}
+	
+}
+
+	
+	
+ System.out.println("No of Links in the page:" +driver.findElements(By.tagName("a")).size());
+	
+	}
+
+}
+ScrollDemo:
+package seleniumassignment;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Scrolldemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+                                               
+		System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+			String URL = "http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html";
+			driver.get(URL);
+			driver.manage().window().maximize();
+		
+			driver.manage().timeouts().implicitlyWait(50000, TimeUnit.MILLISECONDS);
+		WebElement element =	driver.findElement(By.xpath(".//*[@id='mCSB_11_container']/p[6]"));
+			
+			
+			JavascriptExecutor je=	((JavascriptExecutor)driver);
+			je.executeScript("arguments[0].scrollIntoView(true);", element);
+			
+			System.out.println(element.getText());
+		/* to scroll in selenium we must use java script executor which is an interface
+         * which allows us to execute the javascript from selenium script.
+         * je.executescript(scroll(horizontal,vertical));
+         * */
+	}
+}
+SenddataDemo:
+package seleniumassignment;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Senddatademo {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "c://SOFTS//Selenium//chromedriver.exe"); 
+
+		WebDriver driver = new ChromeDriver();
+	driver.get("https://www.google.com");
+	WebElement element = driver.findElement(By.id("lst-ib"));
+	JavascriptExecutor je=	((JavascriptExecutor)driver);
+	je.executeScript("arguments[0].value='padmaja'",element);
+		}}
+    
+    WebTableDemo:
+    package seleniumassignment;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Webtabledemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "c://SOFTS//Selenium//chromedriver.exe"); 
+		WebDriver driver =new ChromeDriver();
+		
+		driver.get("http://www.spicejet.com/");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.findElement(By.xpath(".//*[@id='ctl00_mainContent_txt_Fromdate']")).click();
+		List <WebElement> dates = driver.findElements(By.xpath(".//*[@id='ui-datepicker-div']/div[1]/table"));
+		int tablesize=dates.size();
+		for(int i=0;i<tablesize;i++)
+		{
+			
+                String date=dates.get(i).getText();
+                if(date.equalsIgnoreCase("30")){
+                	dates.get(i).click();
+                	break;
+                }
+		}
+	}
+
+}
+WindowBasedPopus:
+package seleniumassignment;
+
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Windowbasedpopups {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.gecko.driver", "c://SOFTS//Selenium//geckodriver.exe"); 
+		WebDriver driver =new FirefoxDriver();
+		driver.get("https://accounts.google.com/Signup");
+		driver.findElement(By.xpath(".//*[@id='wrapper']/div[2]/div/div[1]/p/a")).click();
+		String parent = driver.getWindowHandle();
+		System.out.println("Before Switching " +driver.getTitle());
+		
+		Set<String> wh=driver.getWindowHandles();
+		Iterator<String> it=wh.iterator();
+		while(it.hasNext()){
+			String child = it.next();
+			
+			if (!parent.equals(child))
+			{
+				driver.switchTo().window(child);
+				Thread.sleep(10000);
+			    System.out.println("After Switching "+driver.getTitle());
+			    //driver.close();                                     //driver.close()----closes the current window only.
+			}
+		}	
+		driver.switchTo().window(parent);
+		System.out.println("After Switching back to parent "+driver.getTitle());
+		Thread.sleep(1000);
+		driver.quit(); // driver.quit ----closes all the windows that are open.
+	}
+
+}
+
+Test1:
+package seleniumassignment;
+
+import static org.testng.Assert.assertEquals;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Test1 {
+	WebDriver driver;
+  @BeforeTest(groups = {"smoke", "sanity"})
+  public void openbrowser() {
+	  System.setProperty("webdriver.chrome.driver", "c:\\SOFTS\\Selenium\\chromedriver.exe");
+	  driver = new ChromeDriver();
+	  System.out.println("browser opened successfully in test1");
+		
+  }
+  
+  @Test(groups = {"smoke"}, priority =1 )
+  public void gmail() {
+	  driver.get("https:\\www.gmail.com");
+	  assertEquals(driver.getTitle(), driver.getTitle());
+	  System.out.println("Gmail opened successfully in test1");
+  }
+  @Test(groups = {"sanity"}, priority =1 )
+  public void facebook() {
+	  driver.get("https:\\www.facebook.com");
+	  assertEquals(driver.getTitle(), driver.getTitle());  
+	  System.out.println("facebook opened successfully in test2");
+  }
+  @AfterTest(groups = {"smoke", "sanity"})
+  public void closebrowser() {
+	  driver.close();
+	  System.out.println("browser closed  successfully in test1");
+  }
+}
+Test2:
+package seleniumassignment;
+
+
+import static org.testng.Assert.assertEquals;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Test2 {
+ 
+  WebDriver driver;
+  @BeforeTest(groups = {"smoke", "sanity"})
+  public void openbrowser() {
+	  System.setProperty("webdriver.chrome.driver","c:\\SOFTS\\Selenium\\chromedriver.exe");
+	    driver = new ChromeDriver();
+	    System.out.println("browser opened successfully in test2");
+  }
+	    
+  @Test (groups = {"smoke"}, priority =1 )
+  public void facebook() {
+	  driver.get("https:\\www.facebook.com");
+	  assertEquals(driver.getTitle(), driver.getTitle());  
+	  System.out.println("facebook opened successfully in test2");
+  }
+  @AfterTest(groups = {"smoke", "sanity"})
+  public void closebrowser() {
+	  driver.close();
+	  System.out.println("browser closed successfully in test2");
+  } 
+  }
+TestNG.XML:
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Test">
+  <groups>
+  <run>
+  <include name="smoke"/>
+  </run>
+  </groups>
+    <classes>
+      <class name="seleniumassignment.Test1"/>
+      <class name="seleniumassignment.Test2"/>
+      
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
